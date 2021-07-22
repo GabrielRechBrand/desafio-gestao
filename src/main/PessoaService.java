@@ -1,10 +1,10 @@
 package main;
 
-import static main.PessoaMemoryRepository.listaTodasPessoas;
+import java.util.List;
 
 public class PessoaService {
 
-    PessoaMemoryRepository pessoaMemoryRepository = new PessoaMemoryRepository();
+    private final PessoaMemoryRepository pessoaMemoryRepository = new PessoaMemoryRepository();
 
     public void salvarPessoa(Pessoa pessoa) {
 
@@ -12,9 +12,9 @@ public class PessoaService {
 
     }
 
-    public void getPessoaById(int id) {
+    public Pessoa getPessoaById(int id) {
 
-        pessoaMemoryRepository.getPessoaById(id);
+        return pessoaMemoryRepository.getPessoaById(id);
 
     }
 
@@ -24,10 +24,9 @@ public class PessoaService {
 
     }
 
-    public void listarTodasPessoas() {
+    public List<Pessoa> listarTodasPessoas() {
 
-        pessoaMemoryRepository.listarTodasPessoas();
-
+        return pessoaMemoryRepository.listarTodasPessoas();
     }
 
 
