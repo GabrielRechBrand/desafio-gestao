@@ -10,10 +10,19 @@ public class Main {
 
     public static void main(String[] args) {
 
-        loop: while (running = true) {
+        Conexao conexao = new Conexao();
+        String sql = "INSERT INTO pessoas(nome, cpf) VALUES('Gabriel Rech Brand', '13222131945');";
+        int res = conexao.executaSQL(sql);
+        if(res > 0) {
+            System.out.println("Cadastrado com sucesso");
+        } else {
+            System.out.println("Erro durante o cadastro");
+        }
 
-            String[] botoes={"Nova Pessoa","Visualizar Pessoa","Editar Pessoa","Excluir Pessoa", "Listar Todos", "Encerrar"};
-            int intInput = JOptionPane.showOptionDialog(null, "Escolha uma opção", "Tela inicial", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, botoes, "default");
+        String[] botoes={"Nova Pessoa","Visualizar Pessoa","Editar Pessoa","Excluir Pessoa", "Listar Todos", "Encerrar"};
+        int intInput = JOptionPane.showOptionDialog(null, "Escolha uma opção", "Tela inicial", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, botoes, "default");
+
+        loop: while (running = true) {
 
             switch (intInput) {
 

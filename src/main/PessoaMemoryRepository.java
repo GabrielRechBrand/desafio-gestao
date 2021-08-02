@@ -13,13 +13,13 @@ public class PessoaMemoryRepository {
                 listaTodasPessoas.put(pessoa.getId(), pessoa);
 
         }
-
+        
         public Pessoa getPessoaById(Integer id) {
 
                 Pessoa pessoa = listaTodasPessoas.get(id);
                 return pessoa;
 
-        }
+        }       
 
         public void excluirPessoa(int id) {
 
