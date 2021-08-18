@@ -1,8 +1,10 @@
 package main;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
+import java.sql.*;
+
+import main.Pessoa;
+
+import javax.xml.transform.Result;
 
 public class Conexao {
 
@@ -10,6 +12,7 @@ public class Conexao {
     private String usuario;
     private String senha;
     private Connection con;
+
 
     Conexao() {
 
@@ -40,4 +43,11 @@ public class Conexao {
             return 0;
         }
     }
+
+    public Connection returnConnection() {
+
+        return this.con;
+
+    }
+
 }

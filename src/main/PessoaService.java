@@ -4,29 +4,31 @@ import java.util.List;
 
 public class PessoaService {
 
-    private final PessoaMemoryRepository pessoaMemoryRepository = new PessoaMemoryRepository();
+//    private final PessoaMemoryRepository pessoaRepository = new PessoaMemoryRepository();
+//    private final PessoaDbRepository pessoaRepository = new PessoaDbRepository();
+      private final PessoaRepository pessoaRepository = new PessoaDbRepository();
 
     public void salvarPessoa(Pessoa pessoa) {
 
-        pessoaMemoryRepository.salvarPessoa(pessoa);
+        pessoaRepository.salvarPessoa(pessoa);
 
     }
 
     public Pessoa getPessoaById(int id) {
 
-        return pessoaMemoryRepository.getPessoaById(id);
+        return pessoaRepository.getPessoaById(id);
 
     }
 
     public void excluirPessoa(int id) {
 
-        pessoaMemoryRepository.excluirPessoa(id);
+        pessoaRepository.excluirPessoa(id);
 
     }
 
     public List<Pessoa> listarTodasPessoas() {
 
-        return pessoaMemoryRepository.listarTodasPessoas();
+        return pessoaRepository.listarTodasPessoas();
     }
 
 

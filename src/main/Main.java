@@ -10,14 +10,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Conexao conexao = new Conexao();
-        String sql = "INSERT INTO pessoas(nome, cpf) VALUES('Gabriel Rech Brand', '13222131945');";
-        int res = conexao.executaSQL(sql);
-        if(res > 0) {
-            System.out.println("Cadastrado com sucesso");
-        } else {
-            System.out.println("Erro durante o cadastro");
-        }
 
         String[] botoes={"Nova Pessoa","Visualizar Pessoa","Editar Pessoa","Excluir Pessoa", "Listar Todos", "Encerrar"};
         int intInput = JOptionPane.showOptionDialog(null, "Escolha uma opção", "Tela inicial", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, botoes, "default");
@@ -82,6 +74,7 @@ public class Main {
             } else {
                 System.out.println("Você digitou um CPF inválido, reinicie o cadastro.");
             }
+
         } catch (NumberFormatException e) {
 
             System.out.println("Você digitou um ID inválido");
@@ -97,6 +90,7 @@ public class Main {
         Pessoa pessoa = pessoaService.getPessoaById(id);
         try {
             System.out.println("O ID ''" + pessoa.getId() + "'' refere-se à pessoa " + pessoa.getNome() + ", seu CPF é: " + pessoa.getCpf());
+
         }
         catch(NullPointerException e) {
             System.out.println("Essa pessoa não existe, tente novamente.");
@@ -155,11 +149,13 @@ public class Main {
     }
 
     public static void listarTodasPessoas() {
+
         List<Pessoa> pessoas = pessoaService.listarTodasPessoas();
-        for(Pessoa pessoa : pessoas) {
-            System.out.println("Nome: " + pessoa.getNome() + " | ID: " + pessoa.getId());
-        }
-        pessoaService.listarTodasPessoas();
+
+            for(Pessoa pessoa : pessoas) {
+                System.out.println("Nome: " + pessoa.getNome() + " | ID: " + pessoa.getId());
+            }
+
     }
 
 

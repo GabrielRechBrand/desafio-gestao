@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class PessoaMemoryRepository {
+public class PessoaMemoryRepository implements PessoaRepository {
 
         private static HashMap<Integer, Pessoa> listaTodasPessoas = new HashMap<>();
 
