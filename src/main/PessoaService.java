@@ -29,6 +29,7 @@ public class PessoaService {
     public List<Pessoa> listarTodasPessoas() {
 
         return pessoaRepository.listarTodasPessoas();
+
     }
 
 

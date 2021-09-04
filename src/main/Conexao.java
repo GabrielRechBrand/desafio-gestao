@@ -24,7 +24,6 @@ public class Conexao {
 
             Class.forName("org.postgresql.Driver");
             con = DriverManager.getConnection(url, usuario, senha);
-            System.out.println("Foi possível fazer a conexão.");
 
         } catch (Exception e) {
             e.printStackTrace();

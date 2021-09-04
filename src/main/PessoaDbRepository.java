@@ -12,12 +12,40 @@ public class PessoaDbRepository implements PessoaRepository {
     public void salvarPessoa(Pessoa pessoa) {
 
         Conexao con = new Conexao();
-        String sql = "INSERT INTO pessoas(nome, cpf) VALUES('" + pessoa.getNome() + "', '" + pessoa.getCpf() + "');";
-        int res = con.executaSQL(sql);
-        if(res > 0) {
-            System.out.println(pessoa.getNome() + " foi cadastrado com sucesso");
-        } else {
-            System.out.println("Erro durante o cadastro");
+
+        try {
+
+            String existQuery = "SELECT EXISTS(SELECT 1 FROM pessoas WHERE id = " + pessoa.getId() +");";
+            Statement statement = con.returnConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(existQuery);
+
+            while(resultSet.next()) {
+
+                if(resultSet.getBoolean("exists")) {
+                    String sql = "UPDATE pessoas SET nome = '" + pessoa.getNome() + "', cpf = '" + pessoa.getCpf() + "' WHERE id = " + pessoa.getId() + ";";
+                    int res = con.executaSQL(sql);
+                    if(res > 0) {
+                        System.out.println(pessoa.getNome() + " foi editado!");
+                    } else {
+                        System.out.println("A edição não pôde ser realizada.");
+                    }
+                } else if (!resultSet.getBoolean("exists")){
+                    String sql = "INSERT INTO pessoas(nome, cpf) VALUES('" + pessoa.getNome() + "', '" + pessoa.getCpf() + "');";
+                    int res = con.executaSQL(sql);
+                    if(res > 0) {
+                        System.out.println(pessoa.getNome() + " foi inserido(a) ao banco!");
+                    } else {
+                        System.out.println("A pessoa não pôde ser adicionada.");
+                    }
+                }
+            }
+
+
+        } catch (SQLException e) {
+
+            System.out.println("Código inválido");
+            e.printStackTrace();
+
         }
 
     }
@@ -70,6 +98,7 @@ public class PessoaDbRepository implements PessoaRepository {
             e.printStackTrace();
 
         }
+
         return null;
     }
 
