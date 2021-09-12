@@ -1,4 +1,4 @@
-package main;
+package main.java.br.com.desafiogestao.model;
 
 public class Pessoa {
 

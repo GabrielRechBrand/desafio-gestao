@@ -1,4 +1,4 @@
-package main;
+package main.java.br.com.desafiogestao.model;
 
 public class Empresa {
 
@@ -22,6 +22,12 @@ public class Empresa {
         this.cnpj = cnpj;
         this.presidente = presidente;
 
+    }
+
+    public Empresa(int id, String nome, String cnpj) {
+        this.id = id;
+        this.nome = nome;
+        this.cnpj = cnpj;
     }
 
     public int getId() {

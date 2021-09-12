@@ -1,4 +1,8 @@
-package main;
+package main.java.br.com.desafiogestao.view;
+
+import main.java.br.com.desafiogestao.model.Pessoa;
+import main.java.br.com.desafiogestao.controller.PessoaService;
+import org.postgresql.util.ServerErrorMessage;
 
 import javax.swing.*;
 import java.util.List;
@@ -10,7 +14,7 @@ public class PessoaMenu {
 
     public static void mostrarMenu() {
 
-        String[] botoes = {"Nova Pessoa", "Visualizar Pessoa", "Editar Pessoa", "Excluir Pessoa", "Listar Todos", "Encerrar"};
+        String[] botoes = {"Nova Pessoa", "Visualizar Pessoa", "Editar Pessoa", "Excluir Pessoa", "Listar Todos", "Voltar"};
 
         loop:
         while (running = true) {
@@ -123,14 +127,17 @@ public class PessoaMenu {
     public static void excluirPessoa() {
         String idString = JOptionPane.showInputDialog("Insira o ID da pessoa a ser excluída");
         int id = Integer.parseInt(idString);
-        Pessoa pessoa3 = pessoaService.getPessoaById(id);
+        Pessoa pessoa = pessoaService.getPessoaById(id);
+
+        ServerErrorMessage serverErrorMessage = new ServerErrorMessage("Essa pessoa está vinculada à uma empresa, verifique suas relações");
 
         try {
-            System.out.println("Você excluiu " + pessoa3.getNome());
             pessoaService.excluirPessoa(id);
+
         }
         catch (NullPointerException e) {
             System.out.println("Essa pessoa não existe, impossível excluir.");
+            e.printStackTrace();
         }
     }
 

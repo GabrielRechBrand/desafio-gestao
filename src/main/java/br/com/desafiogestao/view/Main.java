@@ -1,7 +1,9 @@
-package main;
+package main.java.br.com.desafiogestao.view;
+
+import main.java.br.com.desafiogestao.view.EmpresaMenu;
+import main.java.br.com.desafiogestao.view.PessoaMenu;
 
 import javax.swing.*;
-import java.util.List;
 
 public class Main {
 

@@ -1,9 +1,11 @@
-package main;
+package main.java.br.com.desafiogestao.view;
 
-import com.sun.security.auth.NTUserPrincipal;
+import main.java.br.com.desafiogestao.model.Empresa;
+import main.java.br.com.desafiogestao.controller.EmpresaService;
+import main.java.br.com.desafiogestao.model.Pessoa;
+import main.java.br.com.desafiogestao.controller.PessoaService;
 
 import javax.swing.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class EmpresaMenu {
@@ -14,7 +16,7 @@ public class EmpresaMenu {
 
     public static void mostrarMenu() {
 
-        String[] botoes = {"Nova Empresa", "Visualizar Empresa", "Editar Empresa", "Excluir Empresa", "Listar Empresas", "Informar Presidente", "Demitir Presidente"};
+        String[] botoes = {"Nova Empresa", "Visualizar Empresa", "Editar Empresa", "Excluir Empresa", "Listar Empresas", "Voltar"};
 
         loop: while(running = true) {
 
@@ -38,12 +40,7 @@ public class EmpresaMenu {
                     listarTodasEmpresas();
                     break;
                 case 5:
-                    informarPresidente();
-                    break;
-                case 6:
-                    demitirPresidente();
-                    break;
-
+                    break loop;
             }
 
         }
@@ -58,7 +55,7 @@ public class EmpresaMenu {
             String cnpjDaEmpresa = JOptionPane.showInputDialog("Qual é o CNPJ da empresa?");
             String idStringDoPresidente = JOptionPane.showInputDialog("Qual é o ID do presidente?");
             Integer idDoPresidente = Integer.parseInt(idStringDoPresidente);
-            Pessoa pessoa = pessoaService.getPessoaById(idDoPresidente);
+            Pessoa presidente = pessoaService.getPessoaById(idDoPresidente);
 
             int caracteresCNPJ = 0;
             for(int i = 0; i < cnpjDaEmpresa.length(); i++) {
@@ -67,7 +64,7 @@ public class EmpresaMenu {
             }
 
             if(caracteresCNPJ == 14 && cnpjDaEmpresa.matches("[0-9]+")) {
-                Empresa empresa = new Empresa(nomeDaEmpresa, cnpjDaEmpresa, pessoa);
+                Empresa empresa = new Empresa(nomeDaEmpresa, cnpjDaEmpresa, presidente);
                 empresaService.salvarEmpresa(empresa);
             } else {
                 System.out.println("Você digitou um CNPJ inválido.");
@@ -75,7 +72,7 @@ public class EmpresaMenu {
 
         }
 
-        catch(NumberFormatException e) {
+        catch(NumberFormatException|NullPointerException e) {
 
             System.out.println("Você digitou algo inválido");
 
@@ -88,7 +85,12 @@ public class EmpresaMenu {
         int id = Integer.parseInt(idString);
         Empresa empresa = empresaService.getEmpresaById(id);
         try {
-            System.out.println("O ID '" + id + "' refere-se à empresa: " + empresa.getNome());
+            System.out.println("Nome da Empresa: " + empresa.getNome() + " | ID: " + empresa.getId());
+            if(empresa.getPresidente() != null) {
+                System.out.println("Seu presidente é: " + empresa.getPresidente().getNome());
+            } else {
+                System.out.println("Essa empresa não possui um presidente no momento.");
+            }
         } catch (NullPointerException e) {
             System.out.println("Esse ID não se refere à nenhuma empresa.");
         }
@@ -102,7 +104,7 @@ public class EmpresaMenu {
         Empresa empresa = empresaService.getEmpresaById(id);
         try {
             int n = JOptionPane.showInternalConfirmDialog(null, "Você quer editar a empresa: " + empresa.getNome() + "?", "Confirmação", JOptionPane.YES_NO_OPTION);
-            String[] botoesParaEditar = {"Nome", "Presidente"};
+            String[] botoesParaEditar = {"Nome", "Alterar Presidente", "Demitir Presidente"};
             switch(n) {
                 case 0:
                     int editInput = JOptionPane.showOptionDialog(null, "O que você deseja editar?", "Tela edição", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, botoesParaEditar, "default");
@@ -116,6 +118,14 @@ public class EmpresaMenu {
                             int idPresidente = Integer.parseInt(stringIdPresidente);
                             empresa.setPresidente(pessoaService.getPessoaById(idPresidente));
                             break;
+                        case 2:
+                            Pessoa presidente = empresa.getPresidente();
+                            if(presidente != null) {
+                                System.out.println("Você demitiu o presidente " + empresa.getPresidente().getNome() + "!");
+                                empresa.setPresidente(null);
+                            } else {
+                                System.out.println("Esta empresa está sem um presidente no momento.");
+                            }
                     }
                     empresaService.salvarEmpresa(empresa);
                     break;
@@ -126,6 +136,7 @@ public class EmpresaMenu {
             }
 
         } catch(NullPointerException e ) {
+            e.printStackTrace();
             System.out.println("ID inválido, por favor tente novamente.");
         }
 
@@ -139,7 +150,7 @@ public class EmpresaMenu {
 
         try {
 
-            System.out.println("Você excluiu a empresa: " + empresa.getNome());
+            System.out.println("Você excluiu a empresa");
             empresaService.excluirEmpresa(empresa.getId());
 
         } catch (NullPointerException e) {
@@ -159,14 +170,6 @@ public class EmpresaMenu {
             System.out.println("Nome da Empresa: " + empresa.getNome() + " | ID: " + empresa.getId());
 
         }
-
-    }
-
-    public static void informarPresidente() {
-
-    }
-
-    public static void demitirPresidente() {
 
     }
 

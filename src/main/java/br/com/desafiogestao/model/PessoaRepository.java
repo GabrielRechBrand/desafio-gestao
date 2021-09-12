@@ -1,6 +1,7 @@
-package main;
+package main.java.br.com.desafiogestao.model;
 
-import java.util.ArrayList;
+import main.java.br.com.desafiogestao.model.Pessoa;
+
 import java.util.List;
 
 public interface PessoaRepository {

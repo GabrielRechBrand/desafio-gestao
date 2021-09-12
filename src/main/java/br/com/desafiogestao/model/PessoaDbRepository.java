@@ -1,4 +1,6 @@
-package main;
+package main.java.br.com.desafiogestao.model;
+
+import main.java.br.com.desafiogestao.connection.Conexao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,22 +17,29 @@ public class PessoaDbRepository implements PessoaRepository {
 
         try {
 
-            String existQuery = "SELECT EXISTS(SELECT 1 FROM pessoas WHERE id = " + pessoa.getId() +");";
-            Statement statement = con.returnConnection().createStatement();
-            ResultSet resultSet = statement.executeQuery(existQuery);
+            String existQuery = "SELECT EXISTS(SELECT FROM pessoas WHERE id = ? );";
+            PreparedStatement preparedStatement = con.returnConnection().prepareStatement(existQuery);
+            preparedStatement.setInt(1, pessoa.getId());
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()) {
 
                 if(resultSet.getBoolean("exists")) {
-                    String sql = "UPDATE pessoas SET nome = '" + pessoa.getNome() + "', cpf = '" + pessoa.getCpf() + "' WHERE id = " + pessoa.getId() + ";";
-                    int res = con.executaSQL(sql);
+
+                    String sql = "UPDATE pessoas SET nome = ?, cpf = ? WHERE id = ?;";
+                    PreparedStatement insidePreparedStatement = con.returnConnection().prepareStatement(sql);
+                    insidePreparedStatement.setString(1, pessoa.getNome());
+                    insidePreparedStatement.setString(2, pessoa.getCpf());
+                    insidePreparedStatement.setInt(3, pessoa.getId());
+                    int res = insidePreparedStatement.executeUpdate();
                     if(res > 0) {
                         System.out.println(pessoa.getNome() + " foi editado!");
                     } else {
                         System.out.println("A edição não pôde ser realizada.");
                     }
+
                 } else if (!resultSet.getBoolean("exists")){
-                    String sql = "INSERT INTO pessoas(nome, cpf) VALUES('" + pessoa.getNome() + "', '" + pessoa.getCpf() + "');";
+                    String sql = "INSERT INTO pessoas(nome, cpf) VALUES('" + pessoa.getNome() +"', '" + pessoa.getCpf() + "');";
                     int res = con.executaSQL(sql);
                     if(res > 0) {
                         System.out.println(pessoa.getNome() + " foi inserido(a) ao banco!");
@@ -62,8 +71,11 @@ public class PessoaDbRepository implements PessoaRepository {
 
         Conexao con = new Conexao();
         String sql = "DELETE FROM pessoas WHERE id = " + id;
-        con.executaSQL(sql);
-
+        Pessoa pessoa = getPessoaById(id);
+        int res = con.executaSQL(sql);
+        if(res > 0) {
+            System.out.println("Você excluiu " + pessoa.getNome());
+        }
     }
 
     private Pessoa retornaPessoaSQL(String sql) {

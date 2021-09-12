@@ -1,10 +1,6 @@
-package main;
+package main.java.br.com.desafiogestao.connection;
 
 import java.sql.*;
-
-import main.Pessoa;
-
-import javax.xml.transform.Result;
 
 public class Conexao {
 
@@ -14,7 +10,7 @@ public class Conexao {
     private Connection con;
 
 
-    Conexao() {
+    public Conexao() {
 
         url = "jdbc:postgresql://localhost:5432/desafio-gestao";
         usuario = "postgres";
@@ -37,8 +33,7 @@ public class Conexao {
             int res = stm.executeUpdate(sql);
             con.close();
             return res;
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
             return 0;
         }
     }
