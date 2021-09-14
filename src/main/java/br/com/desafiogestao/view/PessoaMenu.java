@@ -19,7 +19,7 @@ public class PessoaMenu {
         loop:
         while (running = true) {
 
-            int input = JOptionPane.showOptionDialog(null, "Escolha uma opção", "Tela inicial", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, botoes, "default");
+            int input = JOptionPane.showOptionDialog(null, "Escolha uma opção", "Tela pessoas", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, botoes, "default");
 
             switch (input) {
                 case 0:

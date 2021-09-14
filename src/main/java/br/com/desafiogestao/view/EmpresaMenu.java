@@ -20,7 +20,7 @@ public class EmpresaMenu {
 
         loop: while(running = true) {
 
-            int input = JOptionPane.showOptionDialog(null, "Escolha uma opção", "Tela inicial", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, botoes, "default");
+            int input = JOptionPane.showOptionDialog(null, "Escolha uma opção", "Tela empresas", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, botoes, "default");
 
             switch (input) {
 
@@ -28,7 +28,7 @@ public class EmpresaMenu {
                     criarNovaEmpresa();
                     break;
                 case 1:
-                    getEmpresa();
+                    visualizarEmpresa();
                     break;
                 case 2:
                     editarEmpresa();
@@ -79,7 +79,7 @@ public class EmpresaMenu {
         }
     }
 
-    public static void getEmpresa() {
+    public static void visualizarEmpresa() {
 
         String idString = JOptionPane.showInputDialog("Insira o ID da empresa a ser procurada.");
         int id = Integer.parseInt(idString);
