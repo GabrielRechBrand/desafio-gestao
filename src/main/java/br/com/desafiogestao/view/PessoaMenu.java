@@ -1,7 +1,7 @@
 package main.java.br.com.desafiogestao.view;
 
 import main.java.br.com.desafiogestao.model.Pessoa;
-import main.java.br.com.desafiogestao.controller.PessoaService;
+import main.java.br.com.desafiogestao.service.PessoaService;
 import org.postgresql.util.ServerErrorMessage;
 
 import javax.swing.*;

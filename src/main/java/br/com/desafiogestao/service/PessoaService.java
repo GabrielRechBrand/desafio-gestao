@@ -1,7 +1,7 @@
-package main.java.br.com.desafiogestao.controller;
+package main.java.br.com.desafiogestao.service;
 
-import main.java.br.com.desafiogestao.model.PessoaDbRepository;
-import main.java.br.com.desafiogestao.model.PessoaRepository;
+import main.java.br.com.desafiogestao.repository.PessoaDbRepository;
+import main.java.br.com.desafiogestao.repository.PessoaRepository;
 import main.java.br.com.desafiogestao.model.Pessoa;
 
 import java.util.List;

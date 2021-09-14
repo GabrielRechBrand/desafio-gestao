@@ -1,4 +1,6 @@
-package main.java.br.com.desafiogestao.model;
+package main.java.br.com.desafiogestao.repository;
+
+import main.java.br.com.desafiogestao.model.Pessoa;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,6 +1,6 @@
-package main.java.br.com.desafiogestao.controller;
+package main.java.br.com.desafiogestao.service;
 
-import main.java.br.com.desafiogestao.model.EmpresaDbRepository;
+import main.java.br.com.desafiogestao.repository.EmpresaDbRepository;
 import main.java.br.com.desafiogestao.model.Empresa;
 
 import java.util.List;

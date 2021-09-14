@@ -1,7 +1,9 @@
-package main.java.br.com.desafiogestao.model;
+package main.java.br.com.desafiogestao.repository;
 
-import main.java.br.com.desafiogestao.connection.Conexao;
-import main.java.br.com.desafiogestao.controller.PessoaService;
+import main.java.br.com.desafiogestao.configuration.Conexao;
+import main.java.br.com.desafiogestao.service.PessoaService;
+import main.java.br.com.desafiogestao.model.Empresa;
+import main.java.br.com.desafiogestao.model.Pessoa;
 
 import java.sql.*;
 import java.util.ArrayList;

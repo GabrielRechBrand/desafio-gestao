@@ -1,4 +1,4 @@
-package main.java.br.com.desafiogestao.connection;
+package main.java.br.com.desafiogestao.configuration;
 
 import java.sql.*;
 
